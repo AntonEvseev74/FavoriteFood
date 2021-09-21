@@ -25,7 +25,6 @@ import static androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 public class MainActivity extends AppCompatActivity implements OnDataReceived {
     private MyDBManager myDbManager;
-    //private RecyclerView rv;
     private MainAdapter adapter;
 
     @Override

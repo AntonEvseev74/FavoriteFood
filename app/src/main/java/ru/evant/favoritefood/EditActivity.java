@@ -52,31 +52,31 @@ public class EditActivity extends AppCompatActivity {
     private void init() {
         myDbManager = new MyDBManager(this);
 
-        imgContainer =  findViewById(R.id.imgContainer);
-        imgView =  findViewById(R.id.imgView);
-        imgButtonEdit =  findViewById(R.id.imgButtonEdit);
-        imgButtonDelete =  findViewById(R.id.imgButtonDelete);
+        imgContainer = findViewById(R.id.imgContainer);
+        imgView = findViewById(R.id.imgView);
+        imgButtonEdit = findViewById(R.id.imgButtonEdit);
+        imgButtonDelete = findViewById(R.id.imgButtonDelete);
 
-        edTitle =  findViewById(R.id.edTitle);
+        edTitle = findViewById(R.id.edTitle);
         edRecipe = findViewById(R.id.edRecipe);
-        edDescription =  findViewById(R.id.edDescription);
+        edDescription = findViewById(R.id.edDescription);
 
-        addImage =  findViewById(R.id.addImage);
+        addImage = findViewById(R.id.addImage);
     }
 
     // получить данные с MainActivity
     @SuppressLint("RestrictedApi")
-    public void getIntentFromMainAdapter(){
+    public void getIntentFromMainAdapter() {
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             item = (ListItem) intent.getSerializableExtra(MyConstDB.LIST_ITEM_INTENT);
             isEditState = intent.getBooleanExtra(MyConstDB.EDIT_STATE, true);
 
-            if (!isEditState){
+            if (!isEditState) {
                 edTitle.setText(item.getTitle());
                 edRecipe.setText(item.getRecipe());
                 edDescription.setText(item.getDescription());
-                if (!item.getUriImage().equals("empty")){
+                if (!item.getUriImage().equals("empty")) {
                     tempUriImage = item.getUriImage();
                     imgContainer.setVisibility(View.VISIBLE);
                     imgView.setImageURI(Uri.parse(item.getUriImage()));
@@ -99,10 +99,10 @@ public class EditActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_CODE && data != null){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_CODE && data != null) {
             tempUriImage = Objects.requireNonNull(data.getData()).toString();
             imgView.setImageURI(data.getData());
-            getContentResolver().takePersistableUriPermission(data.getData(),Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            getContentResolver().takePersistableUriPermission(data.getData(), Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
     }
 
@@ -111,6 +111,13 @@ public class EditActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_CODE);
+    }
+
+    // кнопка открыть картинку во весь экран
+    public void onClickOpenImage(View view) {
+        Intent intent = new Intent(EditActivity.this, ViewingImageActivity.class);
+        intent.putExtra("image", item.getUriImage());
+        startActivity(intent);
     }
 
     // кнопка сохранить заметку
