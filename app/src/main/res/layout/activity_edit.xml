@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/_green">
-    tools:context=".EditActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imgContainer"
@@ -14,9 +13,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/edTitle"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edTitle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
@@ -55,8 +55,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgView"
             app:srcCompat="@android:drawable/ic_menu_delete" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

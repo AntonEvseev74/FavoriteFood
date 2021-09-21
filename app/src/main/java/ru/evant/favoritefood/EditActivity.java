@@ -147,6 +147,7 @@ public class EditActivity extends AppCompatActivity {
     // кнопка добавить картинку
     public void onClickAddImage(View view) {
         imgContainer.setVisibility(VISIBLE);
+        imgButtonEdit.setVisibility(VISIBLE);
         view.setVisibility(View.GONE);
     }
 
