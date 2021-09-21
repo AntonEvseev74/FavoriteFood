@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Favorite Food</string>
     <string name="title">Title</string>
+    <string name="recipe">Recipe</string>
     <string name="description">Description</string>
     <string name="textview">TextView</string>
     <string name="edit_activity_text_is_empty">Заголовок или описание не заполнено!</string>
     <string name="todo">TODO</string>
     <string name="todo2">TODO</string>
     <string name="icon_logo">icon logo</string>
+    <string name="image">image</string>
+    <string name="delete_image">delete image</string>
+    <string name="choose_image">choose image</string>
 </resources>

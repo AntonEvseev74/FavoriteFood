@@ -18,13 +18,13 @@ import java.util.List;
 import ru.evant.favoritefood.adapter.ListItem;
 import ru.evant.favoritefood.adapter.MainAdapter;
 import ru.evant.favoritefood.db.AppExecutor;
-import ru.evant.favoritefood.db.DBManager;
+import ru.evant.favoritefood.db.MyDBManager;
 import ru.evant.favoritefood.db.OnDataReceived;
 
 import static androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 public class MainActivity extends AppCompatActivity implements OnDataReceived {
-    private DBManager dbManager;
+    private MyDBManager myDbManager;
     //private RecyclerView rv;
     private MainAdapter adapter;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnDataReceived {
     }
 
     private void init() {
-        dbManager = new DBManager(this);
+        myDbManager = new MyDBManager(this);
 
         RecyclerView rv = findViewById(R.id.rv);
         adapter = new MainAdapter(this);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnDataReceived {
     @Override
     protected void onResume() {
         super.onResume();
-        dbManager.openDB();
+        myDbManager.openDB();
         readFromDB("");
     }
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnDataReceived {
         AppExecutor.getInstance().getSubIO().execute(new Runnable() {
             @Override
             public void run() {
-                dbManager.getFromDB(text, MainActivity.this);
+                myDbManager.getFromDB(text, MainActivity.this);
             }
         });
     }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnDataReceived {
 
             @Override
             public void onSwiped(@NonNull ViewHolder viewHolder, int direction) {
-                adapter.removeItem(viewHolder.getAdapterPosition(), dbManager); //
+                adapter.removeItem(viewHolder.getAdapterPosition(), myDbManager); //
             }
         });
     }
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements OnDataReceived {
 
     @Override
     protected void onDestroy() {
-        dbManager.closeDB();
+        myDbManager.closeDB();
         super.onDestroy();
     }
 }

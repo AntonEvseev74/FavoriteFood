@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/_green">
-    tools:context=".EditActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imgContainer"
@@ -15,8 +13,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="@+id/edTitle"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edTitle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
@@ -25,11 +24,14 @@
             android:id="@+id/imgView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:contentDescription="@string/todo"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ic_image_white" />
 
         <ImageButton
@@ -38,11 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:contentDescription="@string/todo"
-            android:onClick="onClickChooseImage"
+            android:contentDescription="@string/choose_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imgView"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_image_white" />
 
         <ImageButton
             android:id="@+id/imgButtonDelete"
@@ -50,16 +51,16 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:contentDescription="@string/todo2"
-            android:onClick="onClickDeleteImage"
+            android:contentDescription="@string/delete_image"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_delete" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -74,15 +75,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:autofillHints=""
-        android:background="@android:drawable/editbox_background_normal"
+        android:autofillHints="@string/title"
         android:ems="10"
         android:hint="@string/title"
         android:inputType="textPersonName"
-        android:padding="10dp"
+        android:text="@string/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgContainer" />
+        app:layout_constraintTop_toTopOf="@+id/imgContainer" />
 
     <EditText
         android:id="@+id/edRecipe"
@@ -91,14 +91,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:background="@android:drawable/editbox_background"
+        android:autofillHints="@string/recipe"
         android:ems="10"
-        android:gravity="top"
         android:hint="@string/recipe"
-        android:inputType="textMultiLine|textPersonName"
-        android:padding="10dp"
+        android:inputType="textPersonName"
+        android:text="@string/recipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,13 +109,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:background="@android:drawable/editbox_background"
+        android:autofillHints="@string/description"
         android:ems="10"
-        android:gravity="top"
         android:hint="@string/description"
         android:inputType="textMultiLine|textPersonName"
-        android:padding="10dp"
+        android:text="@string/description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -126,29 +121,14 @@
         app:layout_constraintTop_toBottomOf="@+id/edRecipe" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="81dp"
+        android:layout_height="72dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:focusable="true"
-        android:onClick="onClickSave"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_image_save" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="onClickAddImage"
-        app:layout_constraintBottom_toTopOf="@+id/addNote"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

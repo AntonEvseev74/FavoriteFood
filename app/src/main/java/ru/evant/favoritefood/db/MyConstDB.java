@@ -1,6 +1,6 @@
 package ru.evant.favoritefood.db;
 
-public final class DBConstants {
+public final class MyConstDB {
 
     public static final String LIST_ITEM_INTENT = "list_item_intent";
     public static final String EDIT_STATE = "edit_state";
@@ -11,7 +11,8 @@ public final class DBConstants {
     static final String TABLE_NAME = "my_table";     // имя таблицы
     static final String _ID = "_id";                 // имя столбца, хранит: идентификационный номер
     static final String TITLE = "title";             // имя столбца, хранит: заголовок
-    static final String DESCRIPTION = "description"; // имя столбца, хранит: описание
+    static final String RECIPE = "recipe";           // имя столбца, хранит рецепт из ингридиетов
+    static final String DESCRIPTION = "description"; // имя столбца, хранит: описание, способ приготовления
     static final String URI_IMAGE = "uri_image";     // имя столбца, хранит: ссылку на картинку
 
     /* для создания таблицы
@@ -21,6 +22,7 @@ public final class DBConstants {
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                     _ID + " INTEGER PRIMARY KEY," +
                     TITLE + " TEXT," +
+                    RECIPE + " TEXT," +
                     DESCRIPTION + " TEXT," +
                     URI_IMAGE + " TEXT);";
 

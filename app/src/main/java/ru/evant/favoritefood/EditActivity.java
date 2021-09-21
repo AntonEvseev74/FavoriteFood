@@ -18,21 +18,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
 import ru.evant.favoritefood.adapter.ListItem;
-import ru.evant.favoritefood.db.DBConstants;
-import ru.evant.favoritefood.db.DBManager;
+import ru.evant.favoritefood.db.MyConstDB;
+import ru.evant.favoritefood.db.MyDBManager;
 
 import static android.view.View.VISIBLE;
 
 public class EditActivity extends AppCompatActivity {
     private final int PICK_IMAGE_CODE = 111;
 
-    private DBManager dbManager;
+    private MyDBManager myDbManager;
 
     private ConstraintLayout imgContainer;
     private ImageView imgView;
     private ImageButton imgButtonEdit, imgButtonDelete;
 
-    private EditText edTitle, edDescription;
+    private EditText edTitle, edRecipe, edDescription;
 
     private FloatingActionButton addImage;
 
@@ -50,7 +50,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void init() {
-        dbManager = new DBManager(this);
+        myDbManager = new MyDBManager(this);
 
         imgContainer =  findViewById(R.id.imgContainer);
         imgView =  findViewById(R.id.imgView);
@@ -58,6 +58,7 @@ public class EditActivity extends AppCompatActivity {
         imgButtonDelete =  findViewById(R.id.imgButtonDelete);
 
         edTitle =  findViewById(R.id.edTitle);
+        edRecipe = findViewById(R.id.edRecipe);
         edDescription =  findViewById(R.id.edDescription);
 
         addImage =  findViewById(R.id.addImage);
@@ -68,11 +69,12 @@ public class EditActivity extends AppCompatActivity {
     public void getIntentFromMainAdapter(){
         Intent intent = getIntent();
         if (intent != null){
-            item = (ListItem) intent.getSerializableExtra(DBConstants.LIST_ITEM_INTENT);
-            isEditState = intent.getBooleanExtra(DBConstants.EDIT_STATE, true);
+            item = (ListItem) intent.getSerializableExtra(MyConstDB.LIST_ITEM_INTENT);
+            isEditState = intent.getBooleanExtra(MyConstDB.EDIT_STATE, true);
 
             if (!isEditState){
                 edTitle.setText(item.getTitle());
+                edRecipe.setText(item.getRecipe());
                 edDescription.setText(item.getDescription());
                 if (!item.getUriImage().equals("empty")){
                     tempUriImage = item.getUriImage();
@@ -89,7 +91,7 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        dbManager.openDB();
+        myDbManager.openDB();
     }
 
     // установить картинку
@@ -114,6 +116,7 @@ public class EditActivity extends AppCompatActivity {
     // кнопка сохранить заметку
     public void onClickSave(View view) {
         String title = edTitle.getText().toString();
+        String recipe = edRecipe.getText().toString();
         String description = edDescription.getText().toString();
 
         // проверить, не устые ли поля
@@ -122,12 +125,12 @@ public class EditActivity extends AppCompatActivity {
         } else {
             if (isEditState) {
                 // записать в ДБ
-                dbManager.insertDB(title, description, tempUriImage);
+                myDbManager.insertDB(title, recipe, description, tempUriImage);
             } else {
                 // изменить запись в БД
-                dbManager.update(item.getId(), title, description, tempUriImage);
+                myDbManager.update(item.getId(), title, recipe, description, tempUriImage);
             }
-            dbManager.closeDB();
+            myDbManager.closeDB();
             finish();
         }
     }
@@ -150,6 +153,6 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dbManager.closeDB();
+        myDbManager.closeDB();
     }
 }

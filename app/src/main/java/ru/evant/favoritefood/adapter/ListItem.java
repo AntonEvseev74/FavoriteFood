@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class ListItem implements Serializable {
     private int id = 0;
     private String title;
+    private String recipe;
     private String description;
     private String uriImage = "empty";
 
@@ -26,6 +27,14 @@ public class ListItem implements Serializable {
         this.title = title;
     }
 
+    public String getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(String recipe) {
+        this.recipe = recipe;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -41,4 +50,5 @@ public class ListItem implements Serializable {
     public void setUriImage(String uri_image) {
         this.uriImage = uri_image;
     }
+
 }

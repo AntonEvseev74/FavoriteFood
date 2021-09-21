@@ -15,8 +15,8 @@ import java.util.List;
 
 import ru.evant.favoritefood.EditActivity;
 import ru.evant.favoritefood.R;
-import ru.evant.favoritefood.db.DBConstants;
-import ru.evant.favoritefood.db.DBManager;
+import ru.evant.favoritefood.db.MyConstDB;
+import ru.evant.favoritefood.db.MyDBManager;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
     private Context context;
@@ -65,8 +65,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, EditActivity.class);
-            intent.putExtra(DBConstants.LIST_ITEM_INTENT, list.get(getAdapterPosition()));
-            intent.putExtra(DBConstants.EDIT_STATE, false);
+            intent.putExtra(MyConstDB.LIST_ITEM_INTENT, list.get(getAdapterPosition()));
+            intent.putExtra(MyConstDB.EDIT_STATE, false);
             context.startActivity(intent);
         }
     }
@@ -81,8 +81,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
     }
 
     // удалить элемент из адаптера и из БД
-    public void removeItem(int position, DBManager dbManager){
-        dbManager.delete(list.get(position).getId());   // удалить этот элемент из БД
+    public void removeItem(int position, MyDBManager myDbManager){
+        myDbManager.delete(list.get(position).getId());   // удалить этот элемент из БД
         list.remove(position);                          // удалить из списка Адаптера для RecyclerView
         notifyItemRangeChanged(0, list.size()); // передать адаптеру, что список стал меньше(передать диапазон списка)
         notifyItemRemoved(position); // передать адаптеру позицию с которой удалили элемент
